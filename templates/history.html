@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title%}
+History
+{% endblock%}
+
+
+{% block main %}
+<table class='table'>
+    <thead>
+        <tr>
+            {% for col in columns %}
+                <th>
+                    {{ col }}
+                </th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in datas%}
+        <tr>
+            <td>{{ data['symbol'].upper() }}</td>
+            <td>{{ data['shares'] }}</td>
+            <td>{{ data['price'] | usd }}</td>
+            <td>{{ data['date_time'] }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}

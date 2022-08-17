@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block title%}
+Bought
+{% endblock %}
+
+{% block main%}
+    <div class="card">
+        <div class="card-header">
+            Bought
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Cost of shares {{ total | usd }}</h5>
+            <p class="card-text"> Cash remaining {{ cash | usd }}</p>
+            <a href="/" class="btn btn-primary">Go to Home</a>
+        </div>
+    </div>
+{% endblock %}
