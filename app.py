@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 
 # Ensure templates are auto-reloaded
-app.config["TEMPLATES_AUTO_RELOAD"] = True
+
 
 # Custom filter
 app.jinja_env.filters["usd"] = usd
