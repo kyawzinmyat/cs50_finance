@@ -252,3 +252,4 @@ def look_up():
         bought_price = db.execute("SELECT AVG(price) FROM history WHERE symbol = ? AND user_id = ?", symbol, session['user_id'])[0]['AVG(price)']
         data[symbol] = [lookup(symbol)['price'], bought_price]
     return data
+
