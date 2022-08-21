@@ -81,7 +81,6 @@ def buy():
         cash, total = buy_shares(symbol, shares, data, db)
         cache_user_symbols(symbol)
         flash('Bought!', 'success')
-
         return render_template("bought.html", total=total, cash=cash)
     return render_template("buy.html")
 
@@ -172,8 +171,8 @@ def register():
             INSERT INTO users(username, hash) VALUES
             (?, ?)
         """, username, generate_password_hash(pass1))
-        return redirect("/")
-
+        flash("Account created successfully", 'success')
+        return render_template("login.html", )
     return render_template("register.html")
 
 
@@ -246,10 +245,13 @@ def get_user_symbol():
 
 @app.route("/lookup", methods = ["POST"])
 def look_up():
-    user_symbols = get_user_symbol()
-    data = {}
-    for symbol in user_symbols:
-        bought_price = db.execute("SELECT AVG(price) FROM history WHERE symbol = ? AND user_id = ?", symbol, session['user_id'])[0]['AVG(price)']
-        data[symbol] = [lookup(symbol)['price'], bought_price]
-    return data
+    try:
+        user_symbols = get_user_symbol()
+        data = {}
+        for symbol in user_symbols:
+            bought_price = db.execute("SELECT AVG(price) FROM history WHERE symbol = ? AND user_id = ?", symbol, session['user_id'])[0]['AVG(price)']
+            data[symbol] = [lookup(symbol)['price'], bought_price]
+        return data
+    except:
+        return None
 
